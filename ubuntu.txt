@@ -1,0 +1,3 @@
+setxkbmap -model pc105 -layout br
+sudo service keyboard-setup restart
+
