@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<job xmlns="http://eobjects.org/analyzerbeans/job/1.0">
+    <job-metadata>
+        <job-description>Created with DataCleaner Community edition 5.8.1</job-description>
+        <author>aid</author>
+        <updated-date>2024-10-20+01:00</updated-date>
+        <metadata-properties>
+            <property name="CoordinatesX.analysis-energy-distribution.project_problem01.csv">289</property>
+            <property name="CoordinatesY.analysis-energy-distribution.project_problem01.csv">122</property>
+        </metadata-properties>
+    </job-metadata>
+    <source>
+        <data-context ref="Project_analis"/>
+        <columns>
+            <column id="col_municipality" path="municipality" type="STRING"/>
+            <column id="col_averageconsumption" path="average consumption" type="STRING"/>
+            <column id="col_percentagesmartmeters" path="percentage smart meters" type="STRING"/>
+        </columns>
+    </source>
+    <transformation>
+        <transformer>
+            <descriptor ref="Convert to number"/>
+            <metadata-properties>
+                <property name="CoordinatesY">122</property>
+                <property name="CoordinatesX">518</property>
+            </metadata-properties>
+            <properties>
+                <property name="Decimal separator" value="."/>
+                <property name="Minus sign" value="-"/>
+                <property name="Null replacement" value="&lt;null&gt;"/>
+                <property name="Thousand separator" value="&amp;#44;"/>
+            </properties>
+            <input ref="col_municipality"/>
+            <input ref="col_averageconsumption"/>
+            <input ref="col_percentagesmartmeters"/>
+            <output id="col_municipalityasnumber" name="municipality (as number)"/>
+            <output id="col_averageconsumptionasnumber" name="average consumption (as number)"/>
+            <output id="col_percentagesmartmetersasnumber" name="percentage smart meters (as number)"/>
+        </transformer>
+    </transformation>
+    <analysis>
+        <analyzer>
+            <descriptor ref="Scatter plot"/>
+            <metadata-properties>
+                <property name="CoordinatesY">120</property>
+                <property name="CoordinatesX">723</property>
+            </metadata-properties>
+            <properties/>
+            <input ref="col_percentagesmartmetersasnumber" name="Variable1"/>
+            <input ref="col_averageconsumptionasnumber" name="Variable2"/>
+        </analyzer>
+    </analysis>
+</job>
