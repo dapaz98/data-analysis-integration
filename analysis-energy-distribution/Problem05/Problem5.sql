@@ -37,7 +37,7 @@ BEGIN
         VALUES (
             
             -- Time ID format: YYYYMM
-            YEAR(current_date) * 100000000 + MONTH(current_date) * 1000000
+            YEAR(current_date) * 100 + MONTH(current_date),
            
             -- Year
             YEAR(current_date),
@@ -61,9 +61,6 @@ END$$
 DELIMITER ;
 
 CALL populate_time_dimension();
-
-
-
 
 DROP TABLE IF EXISTS location_Dimension;
 CREATE TABLE location_Dimension (
