@@ -1,10 +1,7 @@
---
--- Análise e Integração de Dados
---  Prof. Paulo Carreira
---  Prof. Luís Sousa
---  Student Ygor Acacio Maria
---  Student Eduardo
----
+DROP DATABASE IF EXISTS contract_energy_consumption_dw;
+CREATE DATABASE contract_energy_consumption_dw;
+
+USE contract_energy_consumption_dw;
 
 DROP TABLE IF EXISTS Time_Dimension;
 CREATE TABLE Time_Dimension (
@@ -15,8 +12,8 @@ CREATE TABLE Time_Dimension (
 );
 
 
-DROP TABLE IF EXISTS Location_Dimension;
-CREATE TABLE Location_Dimension (
+DROP TABLE IF EXISTS location_dimension;
+CREATE TABLE location_dimension (
     location_id INT AUTO_INCREMENT PRIMARY KEY,
     region VARCHAR(255) NOT NULL,
     municipality VARCHAR(255) NOT NULL,
