@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformation_problem01</name>
+    <name>01-consumption -contract</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -443,73 +444,68 @@
     </hop>
     <hop>
       <from>Select values</from>
-      <to>Filter rows</to>
+      <to>filter_date_consumption</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input 2</from>
-      <to>Select values 2</to>
+      <from>get_number_contracts</from>
+      <to>select_columns</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
-      <to>Filter rows 2</to>
+      <from>select_columns</from>
+      <to>filter_date</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows</from>
+      <from>sort_by_munic</from>
       <to>Group by</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows 2</from>
-      <to>Sort rows 2</to>
+      <from>filter_date</from>
+      <to>sort_munic</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
-      <to>Sort rows</to>
+      <from>filter_date_consumption</from>
+      <to>sort_by_munic</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows 2</from>
+      <from>sort_munic</from>
       <to>Replace in string</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Replace in string</from>
-      <to>Group by 2</to>
+      <to>group_by_munic</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Group by 2</from>
+      <from>group_by_munic</from>
       <to>Calculator</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Group by</from>
-      <to>Join rows</to>
+      <from>get_all_values</from>
+      <to>output_csv</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Calculator</from>
-      <to>Join rows</to>
+      <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Join rows</from>
-      <to>Filter rows 3</to>
+      <from>Group by</from>
+      <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows 3</from>
-      <to>Select values 3</to>
+      <from>Merge join</from>
+      <to>get_all_values</to>
       <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 3</from>
-      <to>Text file output</to>
-      <enabled>N</enabled>
     </hop>
   </order>
   <step>
@@ -539,28 +535,6 @@
     <encoding>UTF-8</encoding>
     <fields>
       <field>
-        <name>﻿Year</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Month</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>Date</name>
         <type>String</type>
         <format/>
@@ -568,17 +542,6 @@
         <decimal>.</decimal>
         <group>,</group>
         <length>7</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>District</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>16</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -594,28 +557,6 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>parish</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>30</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Voltage level</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>32</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>Active Energy (kWh)</name>
         <type>Number</type>
         <format>#.#</format>
@@ -626,50 +567,6 @@
         <precision>3</precision>
         <trim_type>none</trim_type>
       </field>
-      <field>
-        <name>DistrictCode</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictMunicipalityCode</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictMunicipalityParishCode</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>6</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>mes_int</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -680,181 +577,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>384</xloc>
       <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CSV file input 2</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>/media/sf_data-analysis-integration/analysis-energy-distribution/datasets/raw/number_contracts.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding>UTF-8</encoding>
-    <fields>
-      <field>
-        <name>﻿Year</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Month</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Date</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>7</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>District</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>16</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Municipality</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>27</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Parish</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>30</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Includes Smart Meter</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Number of CPE's</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictCode</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictMunicipalityCode</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictMunicipalityParishCode</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Active Contract</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -894,13 +618,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>192</yloc>
+      <xloc>208</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Filter rows</name>
+    <name>filter_date_consumption</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -910,12 +634,12 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Sort rows</send_true_to>
+    <send_true_to>sort_by_munic</send_true_to>
     <send_false_to/>
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>Date_1</leftvalue>
+        <leftvalue>date_consumption</leftvalue>
         <function>=</function>
         <rightvalue/>
         <value>
@@ -938,13 +662,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>32</yloc>
+      <xloc>544</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Filter rows 2</name>
+    <name>filter_date</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -954,12 +678,12 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Sort rows 2</send_true_to>
+    <send_true_to>sort_munic</send_true_to>
     <send_false_to/>
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>Date_2</leftvalue>
+        <leftvalue>date_contract</leftvalue>
         <function>=</function>
         <rightvalue/>
         <value>
@@ -982,43 +706,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 3</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Select values 3</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>Municipality_1</leftvalue>
-        <function>=</function>
-        <rightvalue>Municipality_2</rightvalue>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>720</xloc>
-      <yloc>144</yloc>
+      <xloc>208</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1043,13 +732,13 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>Municipality_1</name>
+        <name>municipality_consumption</name>
       </field>
     </group>
     <fields>
       <field>
         <aggregate>avg_consu</aggregate>
-        <subject>Active Energy (kWh)_1</subject>
+        <subject>energy_consumption</subject>
         <type>AVERAGE</type>
         <valuefield/>
       </field>
@@ -1063,13 +752,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>32</yloc>
+      <xloc>384</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Group by 2</name>
+    <name>group_by_munic</name>
     <type>GroupBy</type>
     <description/>
     <distribute>Y</distribute>
@@ -1089,19 +778,19 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>Municipality_2</name>
+        <name>municipality_contract</name>
       </field>
     </group>
     <fields>
       <field>
         <aggregate>total_smart</aggregate>
-        <subject>Includes Smart Meter_2</subject>
+        <subject>smart_meter_contract</subject>
         <type>SUM</type>
         <valuefield/>
       </field>
       <field>
         <aggregate>total_contrac</aggregate>
-        <subject>Municipality_2</subject>
+        <subject>municipality_contract</subject>
         <type>COUNT_ANY</type>
         <valuefield/>
       </field>
@@ -1115,14 +804,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
+      <xloc>208</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Join rows</name>
-    <type>JoinRows</type>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1131,18 +820,15 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <cache_size>500</cache_size>
-    <main/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>Municipality_1</leftvalue>
-        <function>=</function>
-        <rightvalue>Municipality_1</rightvalue>
-      </condition>
-    </compare>
+    <join_type>INNER</join_type>
+    <step1>Calculator</step1>
+    <step2>Group by</step2>
+    <keys_1>
+      <key>municipality_contract</key>
+    </keys_1>
+    <keys_2>
+      <key>municipality_consumption</key>
+    </keys_2>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1152,8 +838,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>144</yloc>
+      <xloc>320</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1170,7 +856,7 @@
     </partitioning>
     <fields>
       <field>
-        <in_stream_name>Includes Smart Meter_2</in_stream_name>
+        <in_stream_name>smart_meter_contract</in_stream_name>
         <out_stream_name/>
         <use_regex>yes</use_regex>
         <replace_string>Sim</replace_string>
@@ -1182,7 +868,7 @@
         <is_unicode>no</is_unicode>
       </field>
       <field>
-        <in_stream_name>Includes Smart Meter_2</in_stream_name>
+        <in_stream_name>smart_meter_contract</in_stream_name>
         <out_stream_name/>
         <use_regex>yes</use_regex>
         <replace_string>Não</replace_string>
@@ -1203,8 +889,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>304</yloc>
+      <xloc>48</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1221,52 +907,16 @@
     </partitioning>
     <fields>
       <field>
-        <name>﻿Year</name>
-        <rename>﻿Year_1</rename>
-      </field>
-      <field>
-        <name>Month</name>
-        <rename>Month_1</rename>
-      </field>
-      <field>
         <name>Date</name>
-        <rename>Date_1</rename>
-      </field>
-      <field>
-        <name>District</name>
-        <rename>District_1</rename>
+        <rename>date_consumption</rename>
       </field>
       <field>
         <name>Municipality</name>
-        <rename>Municipality_1</rename>
-      </field>
-      <field>
-        <name>parish</name>
-        <rename>parish_1</rename>
-      </field>
-      <field>
-        <name>Voltage level</name>
-        <rename>Voltage level_1</rename>
+        <rename>municipality_consumption</rename>
       </field>
       <field>
         <name>Active Energy (kWh)</name>
-        <rename>Active Energy (kWh)_1</rename>
-      </field>
-      <field>
-        <name>DistrictCode</name>
-        <rename>DistrictCode_1</rename>
-      </field>
-      <field>
-        <name>DistrictMunicipalityCode</name>
-        <rename>DistrictMunicipalityCode_1</rename>
-      </field>
-      <field>
-        <name>DistrictMunicipalityParishCode</name>
-        <rename>DistrictMunicipalityParishCode_1</rename>
-      </field>
-      <field>
-        <name>mes_int</name>
-        <rename>mes_int_1</rename>
+        <rename>energy_consumption</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1279,13 +929,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>544</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
+    <name>select_columns</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1297,52 +947,16 @@
     </partitioning>
     <fields>
       <field>
-        <name>﻿Year</name>
-        <rename>﻿Year_2</rename>
-      </field>
-      <field>
-        <name>Month</name>
-        <rename>Month_2</rename>
-      </field>
-      <field>
         <name>Date</name>
-        <rename>Date_2</rename>
-      </field>
-      <field>
-        <name>District</name>
-        <rename>District_2</rename>
+        <rename>date_contract</rename>
       </field>
       <field>
         <name>Municipality</name>
-        <rename>Municipality_2</rename>
-      </field>
-      <field>
-        <name>Parish</name>
-        <rename>Parish_2</rename>
+        <rename>municipality_contract</rename>
       </field>
       <field>
         <name>Includes Smart Meter</name>
-        <rename>Includes Smart Meter_2</rename>
-      </field>
-      <field>
-        <name>Number of CPE's</name>
-        <rename>Number of CPE's_2</rename>
-      </field>
-      <field>
-        <name>DistrictCode</name>
-        <rename>DistrictCode_2</rename>
-      </field>
-      <field>
-        <name>DistrictMunicipalityCode</name>
-        <rename>DistrictMunicipalityCode_2</rename>
-      </field>
-      <field>
-        <name>DistrictMunicipalityParishCode</name>
-        <rename>DistrictMunicipalityParishCode_2</rename>
-      </field>
-      <field>
-        <name>Active Contract</name>
-        <rename>Active Contract_2</rename>
+        <rename>smart_meter_contract</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1355,13 +969,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>192</yloc>
+      <xloc>208</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 3</name>
+    <name>get_all_values</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1373,16 +987,16 @@
     </partitioning>
     <fields>
       <field>
-        <name>Municipality_1</name>
-        <rename>municipality</rename>
-      </field>
-      <field>
-        <name>avg_consu</name>
-        <rename>average consumption</rename>
+        <name>municipality_consumption</name>
+        <rename/>
       </field>
       <field>
         <name>percent</name>
-        <rename>percentage smart meters</rename>
+        <rename/>
+      </field>
+      <field>
+        <name>avg_consu</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1395,13 +1009,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>240</yloc>
+      <xloc>320</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows</name>
+    <name>sort_by_munic</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -1420,7 +1034,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Municipality_1</name>
+        <name>municipality_consumption</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1437,13 +1051,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>32</yloc>
+      <xloc>384</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows 2</name>
+    <name>sort_munic</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -1462,7 +1076,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Municipality_2</name>
+        <name>municipality_contract</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1479,13 +1093,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>304</yloc>
+      <xloc>48</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Text file output</name>
+    <name>output_csv</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1509,7 +1123,7 @@
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>/media/sf_data-analysis-integration/analysis-energy-distribution/output/project_problem01.csv</name>
+      <name>/media/sf_data-analysis-integration/analysis-energy-distribution/output/question_01</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
@@ -1536,8 +1150,82 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>320</yloc>
+      <xloc>416</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get_number_contracts</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/media/sf_data-analysis-integration/analysis-energy-distribution/datasets/raw/number_contracts.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding>UTF-8</encoding>
+    <fields>
+      <field>
+        <name>Date</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>7</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Municipality</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>27</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Includes Smart Meter</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -430,17 +430,17 @@
     <created_date>2024/10/27 03:56:28.479</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/10/27 03:56:28.479</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>contract_energy_consumption_dw</name>
+    <name>energy_consumption_dw</name>
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>contract_energy_consumption_dw</database>
+    <database>energy_consumption_dw</database>
     <port>3306</port>
     <username>aid</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79ce10be93a6de</password>
@@ -520,6 +520,108 @@
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>get_info_location</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>District</name>
+      </field>
+      <field>
+        <name>Municipality</name>
+      </field>
+      <field>
+        <name>parish</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_dim_location</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>energy_consumption_dw</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>energy_consumption_dw</schema>
+      <table>dim_location</table>
+      <key>
+        <name>District</name>
+        <field>region</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>Municipality</name>
+        <field>municipality</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>parish</name>
+        <field>parish</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>region</name>
+        <rename>District</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>municipality</name>
+        <rename>Municipality</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>parish</name>
+        <rename>parish</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>raw_data</name>
     <type>CsvInput</type>
@@ -790,111 +892,6 @@
     </remotesteps>
     <GUI>
       <xloc>368</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get_info_location</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>District</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Municipality</name>
-        <rename/>
-      </field>
-      <field>
-        <name>parish</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>load_dim_location</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>contract_energy_consumption_dw</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>contract_energy_consumption_dw</schema>
-      <table>dim_location</table>
-      <key>
-        <name>District</name>
-        <field>region</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>Municipality</name>
-        <field>Municipality</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>parish</name>
-        <field>parish</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>region</name>
-        <rename>District</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>municipality</name>
-        <rename>Municipality</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>parish</name>
-        <rename>parish</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>

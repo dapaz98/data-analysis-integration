@@ -436,11 +436,11 @@
   <notepads>
   </notepads>
   <connection>
-    <name>contract_energy_consumption_dw</name>
+    <name>energy_consumption_dw</name>
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>contract_energy_consumption_dw</database>
+    <database>energy_consumption_dw</database>
     <port>3306</port>
     <username>aid</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79ce10be93a6de</password>
@@ -582,11 +582,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>contract_energy_consumption_dw</connection>
+    <connection>energy_consumption_dw</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>contract_energy_consumption_dw</schema>
+      <schema>energy_consumption_dw</schema>
       <table>dim_time</table>
       <key>
         <name>id_time</name>
@@ -700,15 +700,12 @@
     <fields>
       <field>
         <name>﻿Year</name>
-        <rename/>
       </field>
       <field>
         <name>Month</name>
-        <rename/>
       </field>
       <field>
         <name>Date</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
